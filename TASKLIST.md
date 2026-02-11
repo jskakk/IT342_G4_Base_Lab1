@@ -2,13 +2,10 @@ DONE:
 
 -Project Structure Setup
 -Initialize User Model
+-Setup both backend and frontend
+-Setup Database
 
-IN PROGRESS:
-
--User Model
--Properly setting up backend
+IN PROGRESS: 
 
 TODO:
-
--Database
--Frontend
+- Mobile Development
