@@ -16,7 +16,8 @@ export default function Dashboard() {
 
   const logout = () => {
     localStorage.removeItem('user')
-    navigate('/login')
+    setUser(null)
+    navigate('/login', { replace: true })
   }
 
   if (!user) return null

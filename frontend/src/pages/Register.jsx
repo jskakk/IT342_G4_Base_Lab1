@@ -27,10 +27,9 @@ export default function Register() {
     if (!validate()) return
     setLoading(true)
     try {
-      const resp = await axios.post('http://localhost:8080/api/users/register', { username, email, password })
-      localStorage.setItem('user', JSON.stringify(resp.data))
-      setSuccess('Registration successful — redirecting...')
-      setTimeout(() => navigate('/dashboard'), 800)
+      await axios.post('http://localhost:8080/api/users/register', { username, email, password })
+      setSuccess('Registration successful — redirecting to login...')
+      setTimeout(() => navigate('/login', { replace: true }), 800)
     } catch (err) {
       console.error(err)
       setErrors({ server: 'Could not register. Is backend running?' })

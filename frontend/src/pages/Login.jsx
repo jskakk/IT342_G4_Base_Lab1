@@ -22,18 +22,16 @@ export default function Login() {
     if (!validate()) return
     setLoading(true)
     try {
-      const resp = await axios.get('http://localhost:8080/api/users')
-      const users = resp.data || []
-      const found = users.find(u => (u.username === identifier || u.email === identifier) && u.password === password)
-      if (found) {
-        localStorage.setItem('user', JSON.stringify(found))
-        navigate('/dashboard')
-      } else {
-        setErrors({ auth: 'Invalid credentials' })
-      }
+      const resp = await axios.post('http://localhost:8080/api/users/login', { identifier, password })
+      localStorage.setItem('user', JSON.stringify(resp.data))
+      navigate('/dashboard')
     } catch (err) {
       console.error(err)
-      setErrors({ server: 'Error: Could not contact backend' })
+      if (err?.response?.status === 401) {
+        setErrors({ auth: 'Invalid credentials' })
+      } else {
+        setErrors({ server: 'Error: Could not contact backend' })
+      }
     } finally {
       setLoading(false)
     }
